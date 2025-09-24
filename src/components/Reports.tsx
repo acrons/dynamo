@@ -292,7 +292,6 @@ export function Reports({ selectedYear, selectedMonth }: ReportsProps) {
         <div className="reports-hero-header">
           <div className="reports-hero-icon">📊</div>
           <div className="reports-hero-text">
-            <h2 className="reports-hero-title">Centro de Reportes</h2>
             <p className="reports-hero-subtitle">
               Acceda a análisis detallados y métricas avanzadas de su negocio
             </p>
