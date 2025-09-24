@@ -5,6 +5,7 @@ import { Sidebar } from "./Sidebar";
 import { DataTable } from "./DataTable";
 import { DataManagement } from "./DataManagement";
 import { Reports } from "./Reports";
+import { Inventory } from "./Inventory";
 import {
   AnnualSalesChart,
   TopClientsChart,
@@ -152,6 +153,9 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
         return (
           <Reports selectedYear={selectedYear} selectedMonth={selectedMonth} />
         );
+
+      case "inventario":
+        return <Inventory />;
 
       default:
         return <div>Sección no encontrada</div>;
