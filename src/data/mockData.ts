@@ -1,0 +1,570 @@
+// Datos mockeados basados en el dashboard de DYNAMO
+export interface SaleData {
+  id: string;
+  cliente: string;
+  tipoVenta: "Producto" | "Servicio";
+  categoria: "Grabado" | "Bordado" | "UV";
+  monto: number;
+  condicionPago: "Contado" | "Credito";
+  fecha: string;
+  mes: string;
+  año: number;
+}
+
+export interface KPIData {
+  totalVentas: number;
+  totalBordado: number;
+  totalGrabado: number;
+  totalUV: number;
+  ventasPromedioMensual: number;
+  cantidadBordado: number;
+  cantidadGrabado: number;
+  cantidadUV: number;
+}
+
+export interface TopClient {
+  nombre: string;
+  monto: number;
+}
+
+export interface SalesByCategory {
+  categoria: string;
+  monto: number;
+  porcentaje: number;
+}
+
+export interface SalesByPayment {
+  condicion: string;
+  monto: number;
+}
+
+// Datos de ventas mockeados
+export const mockSalesData: SaleData[] = [
+  // Ventas de Grabado
+  {
+    id: "1",
+    cliente: "Indio S.A.",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 58987060,
+    condicionPago: "Contado",
+    fecha: "2024-02-15",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "2",
+    cliente: "Carlos Mendez",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 13500000,
+    condicionPago: "Contado",
+    fecha: "2024-02-10",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "3",
+    cliente: "Kathy Benitez Producciones S.A.",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 4334800,
+    condicionPago: "Contado",
+    fecha: "2024-02-05",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "4",
+    cliente: "Luis Enrique Melzer",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 1118000,
+    condicionPago: "Contado",
+    fecha: "2024-01-28",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "5",
+    cliente: "Alamo S.A.",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 669500,
+    condicionPago: "Contado",
+    fecha: "2024-01-25",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "6",
+    cliente: "Ximena Elizeche",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 616000,
+    condicionPago: "Contado",
+    fecha: "2024-01-20",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "7",
+    cliente: "Maria Ines Saurini",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 576000,
+    condicionPago: "Contado",
+    fecha: "2024-01-18",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "8",
+    cliente: "Idicon S.A.",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 400000,
+    condicionPago: "Contado",
+    fecha: "2024-01-15",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "9",
+    cliente: "Ignacio Portillo",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 360000,
+    condicionPago: "Contado",
+    fecha: "2024-01-12",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "10",
+    cliente: "Maria Laura Zini",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 345000,
+    condicionPago: "Contado",
+    fecha: "2024-01-10",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "11",
+    cliente: "David Benitez",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 300000,
+    condicionPago: "Contado",
+    fecha: "2024-01-08",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "12",
+    cliente: "Christian Sanchez",
+    tipoVenta: "Producto",
+    categoria: "Grabado",
+    monto: 250000,
+    condicionPago: "Contado",
+    fecha: "2024-01-05",
+    mes: "enero",
+    año: 2024,
+  },
+
+  // Ventas de Bordado
+  {
+    id: "13",
+    cliente: "Alberto Dominguez",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 200000,
+    condicionPago: "Contado",
+    fecha: "2024-02-20",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "14",
+    cliente: "Andrea Gonzalez",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 180000,
+    condicionPago: "Contado",
+    fecha: "2024-02-18",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "15",
+    cliente: "Boomerang EAS",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 160000,
+    condicionPago: "Contado",
+    fecha: "2024-02-15",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "16",
+    cliente: "Britimp Seguridad S.A",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 150000,
+    condicionPago: "Contado",
+    fecha: "2024-02-12",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "17",
+    cliente: "Cigar Trading SRL",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 140000,
+    condicionPago: "Contado",
+    fecha: "2024-02-10",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "18",
+    cliente: "Cortex SRL",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 130000,
+    condicionPago: "Contado",
+    fecha: "2024-02-08",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "19",
+    cliente: "Crown Gaming Paraguay",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 120000,
+    condicionPago: "Contado",
+    fecha: "2024-02-05",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "20",
+    cliente: "Eveline Person",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 110000,
+    condicionPago: "Contado",
+    fecha: "2024-02-03",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "21",
+    cliente: "Alfiler S.A.",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 100000,
+    condicionPago: "Contado",
+    fecha: "2024-01-30",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "22",
+    cliente: "Indio S.A.",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 90000,
+    condicionPago: "Contado",
+    fecha: "2024-01-28",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "23",
+    cliente: "Carlos Mendez",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 80000,
+    condicionPago: "Contado",
+    fecha: "2024-01-25",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "24",
+    cliente: "Kathy Benitez Producciones S.A.",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 70000,
+    condicionPago: "Contado",
+    fecha: "2024-01-22",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "25",
+    cliente: "Luis Enrique Melzer",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 60000,
+    condicionPago: "Contado",
+    fecha: "2024-01-20",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "26",
+    cliente: "Alamo S.A.",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 50000,
+    condicionPago: "Contado",
+    fecha: "2024-01-18",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "27",
+    cliente: "Ximena Elizeche",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 40000,
+    condicionPago: "Contado",
+    fecha: "2024-01-15",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "28",
+    cliente: "Maria Ines Saurini",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 30000,
+    condicionPago: "Contado",
+    fecha: "2024-01-12",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "29",
+    cliente: "Idicon S.A.",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 20000,
+    condicionPago: "Contado",
+    fecha: "2024-01-10",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "30",
+    cliente: "Ignacio Portillo",
+    tipoVenta: "Producto",
+    categoria: "Bordado",
+    monto: 10000,
+    condicionPago: "Contado",
+    fecha: "2024-01-08",
+    mes: "enero",
+    año: 2024,
+  },
+
+  // Ventas de UV
+  {
+    id: "31",
+    cliente: "Maria Laura Zini",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 200000,
+    condicionPago: "Contado",
+    fecha: "2024-02-22",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "32",
+    cliente: "David Benitez",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 180000,
+    condicionPago: "Contado",
+    fecha: "2024-02-20",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "33",
+    cliente: "Christian Sanchez",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 160000,
+    condicionPago: "Contado",
+    fecha: "2024-02-18",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "34",
+    cliente: "Alberto Dominguez",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 150000,
+    condicionPago: "Contado",
+    fecha: "2024-02-15",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "35",
+    cliente: "Andrea Gonzalez",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 140000,
+    condicionPago: "Contado",
+    fecha: "2024-02-12",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "36",
+    cliente: "Boomerang EAS",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 130000,
+    condicionPago: "Contado",
+    fecha: "2024-02-10",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "37",
+    cliente: "Britimp Seguridad S.A",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 120000,
+    condicionPago: "Contado",
+    fecha: "2024-02-08",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "38",
+    cliente: "Cigar Trading SRL",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 110000,
+    condicionPago: "Contado",
+    fecha: "2024-02-05",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "39",
+    cliente: "Cortex SRL",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 100000,
+    condicionPago: "Contado",
+    fecha: "2024-02-03",
+    mes: "febrero",
+    año: 2024,
+  },
+  {
+    id: "40",
+    cliente: "Crown Gaming Paraguay",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 90000,
+    condicionPago: "Contado",
+    fecha: "2024-01-30",
+    mes: "enero",
+    año: 2024,
+  },
+  {
+    id: "41",
+    cliente: "Eveline Person",
+    tipoVenta: "Producto",
+    categoria: "UV",
+    monto: 80000,
+    condicionPago: "Contado",
+    fecha: "2024-01-28",
+    mes: "enero",
+    año: 2024,
+  },
+];
+
+// KPIs calculados
+export const mockKPIData: KPIData = {
+  totalVentas: 82850860,
+  totalBordado: 2439500,
+  totalGrabado: 78521360,
+  totalUV: 1890000,
+  ventasPromedioMensual: 84541335,
+  cantidadBordado: 18,
+  cantidadGrabado: 12,
+  cantidadUV: 11,
+};
+
+// Top 10 clientes
+export const mockTopClients: TopClient[] = [
+  { nombre: "Indio S.A.", monto: 58987060 },
+  { nombre: "Carlos Mendez", monto: 13500000 },
+  { nombre: "Kathy Benitez Producciones S.A.", monto: 4334800 },
+  { nombre: "Luis Enrique Melzer", monto: 1118000 },
+  { nombre: "Alamo S.A.", monto: 669500 },
+  { nombre: "Ximena Elizeche", monto: 616000 },
+  { nombre: "Maria Ines Saurini", monto: 576000 },
+  { nombre: "Idicon S.A.", monto: 400000 },
+  { nombre: "Ignacio Portillo", monto: 360000 },
+  { nombre: "Maria Laura Zini", monto: 345000 },
+];
+
+// Ventas por categoría
+export const mockSalesByCategory: SalesByCategory[] = [
+  { categoria: "Grabado", monto: 78521360, porcentaje: 95 },
+  { categoria: "Bordado", monto: 2439500, porcentaje: 3 },
+  { categoria: "UV", monto: 1890000, porcentaje: 2 },
+];
+
+// Ventas por condición de pago
+export const mockSalesByPayment: SalesByPayment[] = [
+  { condicion: "Contado", monto: 82850860 },
+];
+
+// Lista de clientes únicos
+export const mockClients = [
+  "Alamo S.A.",
+  "Alberto Dominguez",
+  "Alfiler S.A.",
+  "Andrea Gonzalez",
+  "Boomerang EAS",
+  "Britimp Seguridad S.A",
+  "Carlos Mendez",
+  "Christian Sanchez",
+  "Cigar Trading SRL",
+  "Cortex SRL",
+  "Crown Gaming Paraguay",
+  "David Benitez",
+  "Eveline Person",
+  "Idicon S.A.",
+  "Ignacio Portillo",
+  "Indio S.A.",
+  "Kathy Benitez Producciones S.A.",
+  "Luis Enrique Melzer",
+  "Maria Ines Saurini",
+  "Maria Laura Zini",
+  "Ximena Elizeche",
+];
+
+// Datos de ventas anuales
+export const mockAnnualSales = {
+  2021: 45000000,
+  2022: 52000000,
+  2023: 68000000,
+  2024: 82850860,
+};
