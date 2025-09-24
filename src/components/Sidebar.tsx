@@ -13,8 +13,8 @@ export function Sidebar({
 }: SidebarProps) {
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: "📊" },
-    { id: "datos", label: "Facturación", icon: "📋" },
-    { id: "reportes", label: "Reportes", icon: "📈" },
+    { id: "datos", label: "Facturación", icon: "💳" },
+    { id: "reportes", label: "Reportes", icon: "📊" },
     { id: "inventario", label: "Inventario", icon: "📦" },
   ];
 

@@ -96,7 +96,7 @@ export function Reports({ selectedYear, selectedMonth }: ReportsProps) {
       id: "clientes",
       title: "Reporte de Clientes",
       description: "Top clientes y análisis de comportamiento",
-      icon: "👥",
+      icon: "👤",
     },
     {
       id: "categorias",
@@ -290,7 +290,7 @@ export function Reports({ selectedYear, selectedMonth }: ReportsProps) {
       {/* Selector de Reportes - Nuevo Diseño */}
       <div className="reports-hero-section">
         <div className="reports-hero-header">
-          <div className="reports-hero-icon">📊</div>
+          <div className="reports-hero-icon">📈</div>
           <div className="reports-hero-text">
             <p className="reports-hero-subtitle">
               Acceda a análisis detallados y métricas avanzadas de su negocio

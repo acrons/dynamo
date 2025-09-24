@@ -429,7 +429,7 @@ export function Inventory() {
                       className="delete-button"
                       title="Eliminar producto"
                     >
-                      🗑️
+                      ✕
                     </button>
                   </div>
                 </div>
