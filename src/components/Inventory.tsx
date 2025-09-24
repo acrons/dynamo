@@ -23,8 +23,8 @@ const initialProducts: Product[] = [
   },
   {
     id: "2",
-    name: "Bolsa Ecologica (Totebag) PERSONALIZADO",
-    category: "Bolsos Ecologicos",
+    name: "Bolsa Ecológica (Totebag) PERSONALIZADO",
+    category: "Bolsos Ecológicos",
     price: 35000,
     stock: 45,
     minStock: 15,
@@ -113,7 +113,7 @@ export function Inventory() {
 
   const categories = [
     "Anotadores Corporativos",
-    "Bolsos Ecologicos",
+    "Bolsos Ecológicos",
     "Hoppies, Vasos y Termos",
     "Kit Asadero",
     "Merchandising",
