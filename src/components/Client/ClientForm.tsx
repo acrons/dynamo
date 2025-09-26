@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Save, X } from 'lucide-react';
 import { Client } from '../../types';
-import { currentUser } from '../../data/mockData';
 
 interface ClientFormProps {
   onSave: (client: Omit<Client, 'id' | 'createdAt' | 'attachments' | 'interactions'>) => void;
@@ -13,33 +12,14 @@ const ClientForm: React.FC<ClientFormProps> = ({ onSave, onCancel }) => {
     fullName: '',
     phone: '',
     email: '',
-    interest: '',
-    captureOrigin: '',
-    capturedBy: currentUser.name,
+    // Valores internos por compatibilidad con el tipo Client
+    interest: 'General',
+    captureOrigin: 'Web',
+    capturedBy: 'Sistema',
     status: 'enviada' as const
   });
 
-  const captureOrigins = [
-    'Evento networking',
-    'Derivación',
-    'Reunión',
-    'Web corporativa',
-    'Redes sociales',
-    'Recomendación',
-    'Publicidad',
-    'Otro'
-  ];
-
-  const interestAreas = [
-    'Derecho Civil',
-    'Derecho Penal',
-    'Derecho Laboral',
-    'Derecho Mercantil',
-    'Derecho Administrativo',
-    'Derecho Fiscal',
-    'Derecho Familiar',
-    'Otro'
-  ];
+  // Form simplificado: sólo datos básicos visibles
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,56 +88,9 @@ const ClientForm: React.FC<ClientFormProps> = ({ onSave, onCancel }) => {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Origen de Captación *
-              </label>
-              <select
-                name="captureOrigin"
-                value={formData.captureOrigin}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="">Seleccionar origen</option>
-                {captureOrigins.map(origin => (
-                  <option key={origin} value={origin}>{origin}</option>
-                ))}
-              </select>
-            </div>
+            
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Área de Interés *
-            </label>
-            <select
-              name="interest"
-              value={formData.interest}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="">Seleccionar área de interés</option>
-              {interestAreas.map(area => (
-                <option key={area} value={area}>{area}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Abogado Captador
-            </label>
-            <input
-              type="text"
-              name="capturedBy"
-              value={formData.capturedBy}
-              onChange={handleChange}
-              disabled
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600"
-            />
-          </div>
+          
 
           <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">
             {onCancel && (

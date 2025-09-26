@@ -14,8 +14,11 @@ import PhotoUploadModal from './components/Client/PhotoUploadModal';
 import LoginScreen from './components/Auth/LoginScreen';
 // Removed StatCard from dashboard in favor of BusinessDashboard
 import Invoices from './components/Billing/Invoices';
+import InvoiceForm from './components/Billing/InvoiceForm';
 import ProductSales from './components/Sales/ProductSales';
 import InventoryDashboard from './components/Inventory/InventoryDashboard';
+import InventoryDetail from './components/Inventory/InventoryDetail';
+import { mockInventory, mockProductsAndServices } from './data/mockData';
 import Settings from './components/Layout/Settings';
 
 function App() {
@@ -27,6 +30,7 @@ function App() {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedInventoryId, setSelectedInventoryId] = useState<string | null>(null);
 
   useEffect(() => {
     // Intentar cargar clientes reales desde CSV en public
@@ -91,11 +95,11 @@ function App() {
     // Simular una llamada a la API
     setTimeout(() => {
       // Credenciales de prueba (en producción esto vendría de una API)
-      if (email === 'admin@estudio.com' && password === '123456') {
+      if (email === 'admin@dynamo.com.py' && password === 'Acrons#2008') {
         setIsAuthenticated(true);
         setIsLoading(false);
       } else {
-        alert('Credenciales incorrectas. Usa: admin@estudio.com / 123456');
+        alert('Credenciales incorrectas. Usa: admin@dynamo.com.py / Acrons#2008');
         setIsLoading(false);
       }
     }, 1500);
@@ -117,12 +121,39 @@ function App() {
     switch (activeView) {
       case 'billing':
         return <Invoices />;
+      case 'new-invoice':
+        return (
+          <InvoiceForm
+            onCancel={() => setActiveView('billing')}
+            onSaved={() => setActiveView('billing')}
+          />
+        );
 
       case 'sales':
         return <ProductSales />;
 
       case 'inventory':
-        return <InventoryDashboard />;
+        return (
+          <InventoryDashboard
+            onItemClick={(id) => {
+              setSelectedInventoryId(id);
+              setActiveView('inventory-detail');
+            }}
+          />
+        );
+      case 'inventory-detail':
+        {
+          const inv = mockInventory.find(i => i.id === selectedInventoryId) || null;
+          const product = inv ? mockProductsAndServices.find(p => p.id === inv.productId) : undefined;
+          if (!inv) return null;
+          return (
+            <InventoryDetail
+              inventoryItem={inv}
+              product={product}
+              onBack={() => setActiveView('inventory')}
+            />
+          );
+        }
       case 'settings':
         return <Settings />;
       case 'new-client':
@@ -155,14 +186,6 @@ function App() {
                   <p className="text-sm text-gray-500">Nuevos (últimos 30 días)</p>
                   <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.createdAt >= new Date(Date.now() - 30*24*60*60*1000)).length}</p>
                 </div>
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <p className="text-sm text-gray-500">Con propuesta aceptada</p>
-                  <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.status === 'aceptada').length}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <p className="text-sm text-gray-500">Con seguimiento pendiente</p>
-                  <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.status !== 'aceptada').length}</p>
-                </div>
               </div>
 
               <ClientTable
@@ -188,14 +211,6 @@ function App() {
                   <p className="text-sm text-gray-500">Nuevos (últimos 30 días)</p>
                   <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.createdAt >= new Date(Date.now() - 30*24*60*60*1000)).length}</p>
                 </div>
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <p className="text-sm text-gray-500">Con propuesta aceptada</p>
-                  <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.status === 'aceptada').length}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <p className="text-sm text-gray-500">Con seguimiento pendiente</p>
-                  <p className="text-2xl font-semibold mt-1">{filteredClients.filter(c => c.status !== 'aceptada').length}</p>
-                </div>
               </div>
 
               <ClientTable
@@ -219,6 +234,7 @@ function App() {
       case 'billing': return 'Facturación';
       case 'sales': return 'Ventas por Producto/Servicio';
       case 'inventory': return 'Inventario & KPIs';
+      case 'inventory-detail': return 'Detalle de Inventario';
       case 'settings': return 'Configuración';
       case 'new-client': return 'Alta de Cliente';
       case 'client-detail': return 'Detalle de Cliente';
@@ -234,6 +250,7 @@ function App() {
       case 'billing': return 'Gestione facturas, estados y montos';
       case 'sales': return 'Análisis de ingresos por cada ítem';
       case 'inventory': return 'Seguimiento de stock y puntos de reposición';
+      case 'inventory-detail': return 'Datos del ítem y métricas de stock';
       case 'settings': return 'Preferencias del sistema y de la app';
       case 'new-client': return 'Registre un nuevo cliente en el sistema';
       case 'client-detail': return 'Vista detallada del cliente y seguimiento';
@@ -284,6 +301,11 @@ function App() {
           title={getPageTitle()}
           subtitle={getPageSubtitle()}
           onMobileMenuToggle={() => setIsMobileSidebarOpen(true)}
+          activeView={activeView}
+          onAddClient={() => setActiveView('new-client')}
+          onAddInventory={() => alert('Formulario de Inventario: próximamente')}
+          onAddInvoice={() => setActiveView('new-invoice')}
+          onAddSale={() => alert('Registro de Venta: próximamente')}
         />
         
         <main className="flex-1 p-6 overflow-auto">

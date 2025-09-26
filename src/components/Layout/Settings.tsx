@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const Settings: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [notifications, setNotifications] = useState(true);
 
   return (
     <div className="space-y-6">
@@ -28,21 +27,7 @@ const Settings: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-900">Notificaciones</p>
-              <p className="text-sm text-gray-500">Recibe avisos sobre cambios en facturas y stock</p>
-            </div>
-            <button
-              onClick={() => setNotifications(!notifications)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${notifications ? 'bg-blue-600' : 'bg-gray-300'}`}
-              aria-pressed={notifications}
-            >
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${notifications ? 'translate-x-6' : 'translate-x-1'}`} />
-            </button>
-          </div>
-        </div>
+        
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">

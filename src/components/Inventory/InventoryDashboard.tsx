@@ -1,7 +1,11 @@
 import React, { useMemo } from 'react';
 import { mockInventory, mockProductsAndServices } from '../../data/mockData';
 
-const InventoryDashboard: React.FC = () => {
+interface InventoryDashboardProps {
+  onItemClick?: (inventoryId: string) => void;
+}
+
+const InventoryDashboard: React.FC<InventoryDashboardProps> = ({ onItemClick }) => {
   const rows = mockInventory.map(item => {
     const product = mockProductsAndServices.find(p => p.id === item.productId);
     const stockValue = (product?.unitPrice ?? 0) * item.quantityOnHand;
@@ -56,7 +60,11 @@ const InventoryDashboard: React.FC = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {rows.map(r => (
-                <tr key={r.item.id} className="hover:bg-gray-50">
+                <tr
+                  key={r.item.id}
+                  className="hover:bg-gray-50 cursor-pointer"
+                  onClick={() => onItemClick?.(r.item.id)}
+                >
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{r.product?.sku ?? '—'}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{r.product?.name ?? '—'}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-900">{r.item.quantityOnHand}</td>
